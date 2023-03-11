@@ -1,7 +1,16 @@
 #include "game.h"
 
 void Game::init() {
-    // Initialize ncurses
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+        exit(1);
+
+    atexit(SDL_Quit);
+
+    pdc_window = SDL_CreateWindow("California Trail (working title)", SDL_WINDOWPOS_UNDEFINED,
+                                  SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_RESIZABLE);
+    pdc_screen = SDL_GetWindowSurface(pdc_window);
+
+    // Initialize curses
     initscr();
     noecho();
     cbreak();
